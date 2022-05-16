@@ -9,6 +9,14 @@ public interface Value {
 
     @Nullable String value();
 
+    default @NotNull String asString() {
+        String v = value();
+        if (v == null) {
+            return String.valueOf(original());
+        }
+        return v;
+    }
+
     @Override @NotNull String toString();
 
     static @NotNull Value of(int original) {

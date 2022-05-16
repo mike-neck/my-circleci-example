@@ -8,6 +8,8 @@ import org.jetbrains.annotations.Unmodifiable;
 
 public interface RuleSet {
 
+    int size();
+
     @NotNull Value apply(@NotNull Value value);
 
     default @NotNull @Unmodifiable List<@NotNull Value> apply(int... values) {

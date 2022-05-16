@@ -1,3 +1,13 @@
 plugins {
     id 'java-project'
+    id 'application'
+}
+
+dependencies {
+    implementation project(':api')
+    implementation project(':impl')
+}
+
+application {
+    mainClass.set('com.example.app.Main')
 }

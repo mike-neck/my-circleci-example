@@ -5,11 +5,17 @@ import com.example.RuleSet;
 import com.example.Value;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
 public class LeftToRightAppendingRuleSet implements RuleSet {
 
-    private final @NotNull Iterable<@NotNull Rule> rules;
+    private final @NotNull List<@NotNull Rule> rules;
+
+    @Override
+    public int size() {
+        return rules.size();
+    }
 
     public LeftToRightAppendingRuleSet(@NotNull Rule rule, @NotNull Rule @NotNull ... rules) {
         var list = new ArrayList<@NotNull Rule>(1 + rules.length);
