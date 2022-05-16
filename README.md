@@ -1,0 +1,2 @@
+# my-circleci-example
+サークルCIであそぶ
