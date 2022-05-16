@@ -1,5 +1,6 @@
-package com.example;
+package com.example.impl;
 
+import com.example.Value;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertAll;

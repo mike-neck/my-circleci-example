@@ -1,5 +1,7 @@
-package com.example;
+package com.example.impl;
 
+import com.example.Rule;
+import com.example.Value;
 import org.jetbrains.annotations.NotNull;
 
 public class ModRule implements Rule {

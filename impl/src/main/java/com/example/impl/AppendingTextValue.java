@@ -1,5 +1,6 @@
-package com.example;
+package com.example.impl;
 
+import com.example.Value;
 import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
