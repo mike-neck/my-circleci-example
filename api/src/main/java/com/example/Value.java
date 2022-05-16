@@ -27,6 +27,22 @@ public interface Value {
             public @NotNull String toString() {
                 return "Default[" + original + "]";
             }
+
+            @Override
+            public int hashCode() {
+                return original;
+            }
+
+            @Override
+            public boolean equals(Object obj) {
+                if (!(obj instanceof Value value)) {
+                    return false;
+                }
+                if (value.value() != null) {
+                    return false;
+                }
+                return value.original() == original;
+            }
         };
     }
 }
