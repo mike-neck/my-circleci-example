@@ -27,4 +27,14 @@ class ModRuleTest {
 
         assertEquals(value, actual);
     }
+
+    @Test
+    void normalFailure() {
+        Value value = new ValueImpl(3, "Fizz");
+        Value actual = rule.apply(value);
+
+        Value expected = new ValueImpl(15, "FizzBuzz");
+
+        assertEquals(expected, actual);
+    }
 }
