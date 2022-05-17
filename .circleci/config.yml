@@ -8,6 +8,19 @@ executors:
     docker:
       - image: cimg/openjdk:17.0
 
+jobs: 
+  create-distribution:
+    executor: openjdk
+    steps:
+      - checkout
+      - gradle/with_cache:
+          steps:
+            - run:
+                name: Create distribution
+                command: ./gradlew ":app:assembleDist"
+      - store_artifacts: 
+          path: app/build/distributions/
+
 workflows: 
   all-tests:
     jobs:
@@ -36,3 +49,14 @@ workflows:
           requires:
             - api-test
             - impl-test
+
+  run-app:
+    jobs:
+      - gradle/run:
+          name: run
+          executor: openjdk
+          command: ":app:run"
+
+  distribution:
+    jobs:
+      - create-distribution
