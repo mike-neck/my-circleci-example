@@ -1,0 +1,28 @@
+version: 2.1
+
+orbs: 
+  gradle: circleci/gradle@2.2.0
+
+executors: 
+  openjdk:
+    docker:
+      - image: cimg/openjdk:17.0
+
+workflows: 
+  all-tests:
+    jobs:
+      - gradle/test:
+          name: api-test
+          test_command: ":api:test"
+          test_results_path: api/build/test-results/ 
+          reports_path: api/build/reports/
+          executor: openjdk
+
+      - gradle/test:
+          name: impl-test
+          test_command: ":impl:test"
+          test_results_path: impl/build/test-results/
+          reports_path: impl/build/reports/
+          executor: openjdk
+          requires:
+            - api-test
