@@ -5,10 +5,12 @@ import com.example.Value;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestFactory;
+import org.junit.jupiter.api.function.Executable;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,6 +18,19 @@ class LeftToRightAppendingRuleSetTest {
 
     static @NotNull Value value(int original, @NotNull String text) {
         return new ValueImpl(original, text);
+    }
+
+    @SuppressWarnings("SameParameterValue")
+    @Contract(pure = true)
+    static @NotNull Executable runInMillis(long ms, @NotNull Runnable test) {
+        return () -> {
+            try {
+                Thread.sleep(ms);
+                test.run();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        };
     }
 
     @TestFactory
@@ -27,10 +42,10 @@ class LeftToRightAppendingRuleSetTest {
                 .limit(100_000)
                 .mapToObj(
                         v -> DynamicTest.dynamicTest(String.valueOf(v),
-                        () -> {
+                        runInMillis(2L, () -> {
                             List<@NotNull Value> actual = ruleSet.apply(v);
                             assertIterableEquals(List.of(Value.of(v)), actual);
-                        }));
+                        })));
     }
 
     @Test
