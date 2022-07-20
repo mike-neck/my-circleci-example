@@ -1,0 +1,18 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto11
+
+  pre_build:
+    on-failure: ABORT
+    commands:
+      - ./gradlew ":api:dependencies" --configuration compileClasspath
+      - ./gradlew ":impl:dependencies" --configuration compileClasspath
+      - ./gradlew ":app:dependencies" --configuration "runtimeClasspath"
+
+  build:
+    on-failure: ABORT
+    commands:
+      - ./gradlew test
