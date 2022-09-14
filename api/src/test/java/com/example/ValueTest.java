@@ -17,7 +17,7 @@ class ValueTest {
         return random.ints(100L)
                 .mapToObj(original -> {
                     var value = Value.of(original);
-                    return DynamicTest.dynamicTest("original:" + original, () -> assertEquals(original, value.original()));
+                    return DynamicTest.dynamicTest("original : " + original, () -> assertEquals(original, value.original()));
                 });
     }
 
@@ -27,7 +27,7 @@ class ValueTest {
         return random.ints(100L)
                 .mapToObj(original -> {
                     var value = Value.of(original);
-                    return DynamicTest.dynamicTest("original:" + original, () -> assertNull(value.value()));
+                    return DynamicTest.dynamicTest("original : " + original, () -> assertNull(value.value()));
                 });
     }
 }
