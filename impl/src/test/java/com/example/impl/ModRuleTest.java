@@ -33,6 +33,6 @@ class ModRuleTest {
         Value value = new ValueImpl(3, "Fizz");
         Value actual = rule.apply(value);
 
-        assertEquals(new ValueImpl(15, "FizzBuzz"), actual);
+        assertEquals(value, actual);
     }
 }
